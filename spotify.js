@@ -16,7 +16,14 @@ async function getSongs() {
     return songs
 }
 
+const playMusic = (track)=>{
+    let audio = new Audio("/Spotify clone/songs/" + track)
+    audio.play()
+}
+
 async function main() {
+
+    let currentSong;
     // Get the list of all the songs
     let songs = await getSongs()
 
@@ -34,8 +41,13 @@ async function main() {
         </div>  </li>`;
     }
 
-  
-
+    // Attach an event listener to each song
+    Array.from(document.querySelector(".songList").getElementsByTagName("li")).forEach(e =>{
+        e.addEventListener("click", element => {
+            console.log(e.querySelector(".info").firstElementChild.innerHTML)
+            playMusic(e.querySelector(".info").firstElementChild.innerHTML.trim())
+        })
+    })
   
 }
 main()
