@@ -1,4 +1,5 @@
 
+let currentSong = new Audio();
 async function getSongs() {
     let a = await fetch("http://127.0.0.1:3000/Spotify%20clone/songs/")
     let response = await a.text();
@@ -17,13 +18,16 @@ async function getSongs() {
 }
 
 const playMusic = (track)=>{
-    let audio = new Audio("/Spotify clone/songs/" + track)
-    audio.play()
+    currentSong.src = "/Spotify clone/songs/" + track
+    currentSong.play()
+    play.src = "pause.svg"
+    document.querySelector(".songinfo").innerHTML = track
+    document.querySelector(".songtime").innerHTML = "00:00 / 00:00"
+
 }
 
 async function main() {
 
-    let currentSong;
     // Get the list of all the songs
     let songs = await getSongs()
 
@@ -47,6 +51,23 @@ async function main() {
             console.log(e.querySelector(".info").firstElementChild.innerHTML)
             playMusic(e.querySelector(".info").firstElementChild.innerHTML.trim())
         })
+    })
+
+    //Attach an event listener to play, previous and next
+    play.addEventListener("click", () => {
+        if(currentSong.paused){
+            currentSong.play()
+            play.src = "pause.svg"
+        }
+        else{
+            currentSong.pause()
+            play.src = "play.svg"
+        }
+    })
+
+    //Listen for timeupdate event
+    currentSong.addEventListener("timeupdate", ()=>{
+        console.log(currentSong.currentTime, a.duration);
     })
   
 }
