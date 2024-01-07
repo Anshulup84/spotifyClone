@@ -31,11 +31,13 @@ async function getSongs() {
     return songs
 }
 
-const playMusic = (track)=>{
+const playMusic = (track, pause = false) => {
     currentSong.src = "/Spotify clone/songs/" + track
-    currentSong.play()
-    play.src = "pause.svg"
-    document.querySelector(".songinfo").innerHTML = track
+    if(!pause){
+        currentSong.play()
+        play.src = "pause.svg"
+    }
+    document.querySelector(".songinfo").innerHTML = decodeURI(track)
     document.querySelector(".songtime").innerHTML = "00:00 / 00:00"
 
 }
@@ -44,6 +46,7 @@ async function main() {
 
     // Get the list of all the songs
     let songs = await getSongs()
+    playMusic(songs[0], true)
 
     //Show all the song in the playlist
     let songUL = document.querySelector(".songList").getElementsByTagName("ul")[0]
@@ -82,8 +85,16 @@ async function main() {
     //Listen for timeupdate event
     currentSong.addEventListener("timeupdate", ()=>{
         console.log(currentSong.currentTime, currentSong.duration);
-
         document.querySelector(".songtime").innerHTML = `${secondsToMinutesSeconds(currentSong.currentTime)}/${secondsToMinutesSeconds(currentSong.duration)}`
+        document.querySelector(".circle").style.left = (currentSong.currentTime/ currentSong.duration) * 100 + "%";
+    })
+
+    // Add an event listener to seekbar
+
+    document.querySelector(".seekbar").addEventListener("click", e=>{
+        let percent = (e.offsetX/e.target.getBoundingClientRect().width) * 100;
+        document.querySelector(".circle").style.left = percent + "%";
+        currentSong.currentTime = ((currentSong.duration)* percent)/100
     })
   
 }
