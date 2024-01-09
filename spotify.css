@@ -3,6 +3,10 @@
     padding: 0;
 }
 
+.close{
+    display: none;
+}
+
 body{
     background-color: black;
     color: white;
@@ -76,6 +80,10 @@ body{
 }
 
 .spotifyPlaylist{
+    padding: 16px;
+}
+
+.spotifyPlaylist h1{
     padding: 16px;
 }
 
@@ -288,13 +296,41 @@ body{
     .right {
         width: 100vw;
     }
+
     .playbar{
-        width: 88vw;
+        width: calc(100vw - 75px);
     }
+
     .seekbar{
-        width: 90%;
+        width: calc(100vw - 120px);
     }
+
     .hamburger{
         display: block;
     }
+
+    .right{
+        margin: 0;
+    }
+
+    .card{
+        width: 90vw;
+    }
+
+    .cardContainer{
+        margin: 0;
+        justify-content: center;
+    }
+
+    .close{
+        display: block;
+    }
+
+    .abovebar {
+        flex-direction: column;
+        gap: 23px;
+        align-items: center;
+    }
+
+
 }
