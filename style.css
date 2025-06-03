@@ -19,13 +19,31 @@
     width: 75vw;
 }
 
-.home{
-    padding: 10px;
-}
+/* .home{
+    
+} */
 
 .home ul li{
     display: flex;
     gap: 15px;
     width: 34px;
     list-style: none;
+    padding-top: 14px;
+    font-weight: bold;
+}
+
+.heading{
+     display: flex;
+    gap: 15px;
+    width: 100%;
+    list-style: none;
+    padding-top: 14px;
+    padding: 23px 14px;
+    font-weight: bold;
+    align-items: center;
+    font-size: 13px;
+}
+
+.heading img {
+    width: 30px;
 }
