@@ -1,102 +1,124 @@
-*{
-    margin: 0;
-    padding: 0;
+* {
+  margin: 0;
+  padding: 0;
 }
 
-body{
-    background-color: black;
-    color: white;
+body {
+  background-color: black;
+  color: white;
 }
 
-
-.left{
-    width: 25vw;
-    padding: 10px;
+.left {
+  width: 25vw;
+  padding: 10px;
 }
 
-.right{
-    width: 75vw;
+.right {
+  width: 75vw;
 }
 
 /* .home{
     
 } */
 
-.home ul li{
-    display: flex;
-    gap: 15px;
-    width: 34px;
-    list-style: none;
-    padding-top: 14px;
-    font-weight: bold;
+.home ul li {
+  display: flex;
+  gap: 15px;
+  width: 34px;
+  list-style: none;
+  padding-top: 14px;
+  font-weight: bold;
 }
 
-.heading{
-     display: flex;
-    gap: 15px;
-    width: 100%;
-    list-style: none;
-    padding-top: 14px;
-    padding: 23px 14px;
-    font-weight: bold;
-    align-items: center;
-    font-size: 13px;
+.heading {
+  display: flex;
+  gap: 15px;
+  width: 100%;
+  list-style: none;
+  padding-top: 14px;
+  padding: 23px 14px;
+  font-weight: bold;
+  align-items: center;
+  font-size: 13px;
 }
 
 .heading img {
-    width: 30px;
+  width: 30px;
 }
 
-.library{
-    min-height: 80vh;
-    position: relative;
+.library {
+  min-height: 80vh;
+  position: relative;
 }
 
-.footer{
-    display: flex;
-    font-size: 10px;
-    color: grey;
-    gap: 13px;
-    position: absolute;
-    bottom: 0;
+.footer {
+  display: flex;
+  font-size: 10px;
+  color: grey;
+  gap: 13px;
+  position: absolute;
+  bottom: 0;
+  padding: 10px 0;
 }
 
-
-.footer a{
-    color: gray;
+.footer a {
+  color: gray;
 }
 
-.right{
-    margin: 16px 0;;
+.right {
+  margin: 16px 0;
 }
 
 .header {
-    display: flex;
-    justify-content: space-between;
-    background-color: rgb(34, 34, 34);
+  display: flex;
+  justify-content: space-between;
+  background-color: rgb(34, 34, 34);
 }
 
 .header > * {
-    padding: 20px;
+  padding: 20px;
 }
 
-.spotifyPlaylists{
-    padding: 16px;
+.spotifyPlaylists {
+  padding: 16px;
 }
 
-.spotifyPlaylists .card{
-    width: 200px;
-    padding: 10px;
-    border-radius: 5px;
-    background-color: #252225;
+.cardContainer {
+  margin: 30px;
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
 }
 
-.card > *{
-    padding-top: 10px;
+.card {
+  width: 200px;
+  padding: 10px;
+  border-radius: 5px;
+  background-color: #252225;
+  position: relative;
+}
+
+.card > * {
+  padding-top: 10px;
 }
 
 .card img {
-    width: 100%;
-    object-fit: contain;
+  width: 100%;
+  object-fit: contain;
 }
 
+.play {
+  width: 40px;
+  height: 40px;
+  background-color: #1fdf64;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4px;
+  position: absolute;
+  top: 168px;
+  right: 17px;
+  opacity: 0;
+  transition: all 1s ease-out;
+}
