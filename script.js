@@ -22,13 +22,19 @@ async function main(){
     // Get the list of all ssongs
 let songs = await getSongs()
 console.log(songs);
+
+   let songUL = document.querySelector(".songList").getElementsByTagName("ul")[0]
+   for(const song of songs) {
+    songUL.innerHTML = songUL.innerHTML + `<li> ${song} </li>`;
+   }
+
     //Play the first song
     var audio = new Audio(songs[0])
-    audio.play();
+    // audio.play();
 
     audio.addEventListener("loadeddata", () => {
-        let duration = audio.duration
-        console.log(duration);
+        
+        console.log(audio.duration, audio.currentSrc, audio.currentTime);
         
         
     })
