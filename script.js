@@ -1,4 +1,6 @@
 let currentSong = new Audio();
+
+
 async function getSongs() {
   let a = await fetch("http://127.0.0.1:3000/spotifyClone/songs/");
   let response = await a.text();
@@ -18,13 +20,14 @@ async function getSongs() {
 }
 
 const playMusic = (track) => {
-  
-  currentSong.src = "./songs/" + track
-  currentSong.play()
-}
+  currentSong.src = "./songs/" + track;
+  currentSong.play();
+  play.src = "pause.svg";
+  document.querySelector(".songinfo").innerHTML = track;
+  document.querySelector(".songtime").innerHTML = "00:00 / 00:00";
+};
 
 async function main() {
-
   // Get the list of all ssongs
   let songs = await getSongs();
 
@@ -50,18 +53,28 @@ async function main() {
   }
 
   // Attach an event Listener to each song
-  Array.from(document.querySelector(".songList").getElementsByTagName("li")).forEach(e => {
-
-    e.addEventListener("click", element => {
+  Array.from(
+    document.querySelector(".songList").getElementsByTagName("li")
+  ).forEach((e) => {
+    e.addEventListener("click", (element) => {
       // console.log(e.querySelector(".info").firstElementChild.innerHTML);
-      playMusic(e.querySelector(".info").firstElementChild.innerHTML.trim())
+      playMusic(e.querySelector(".info").firstElementChild.innerHTML.trim());
+    });
+  });
+  // Attach an event Listener to play , next and previous
+  play.addEventListener("click", () => {
+    if (currentSong.paused) {
+      currentSong.play();
+      play.src = "pause.svg";
+    } else {
+      currentSong.pause();
+      play.src = "play.svg";
+    }
+  });
 
-    })
+  // Listen for timeupdate event
+  currentSong.addEventListener("timeupdate", () => {
 
-    // Attach an event Listener to play , next and previous
-    
-
-    
   })
 }
 
