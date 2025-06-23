@@ -104,6 +104,8 @@ async function main() {
 
   })
 
+  //Add an event listener for hamburger
+
 }
 
 main();
