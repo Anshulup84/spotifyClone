@@ -92,8 +92,8 @@ async function main() {
   currentSong.addEventListener("timeupdate", () => {
     document.querySelector(".songtime").innerHTML = `${secondsToMinutesSeconds(
       currentSong.currentTime
-    )}/${secondsToMinutesSeconds(currentSong.duration)}`;
-    document.querySelector(".circle").style.left = (currentSong.currentTime/ currentSong.duration) * 100 + "%"
+    )} / ${secondsToMinutesSeconds(currentSong.duration)}`;
+    document.querySelector(".circle").style.left = (currentSong.currentTime / currentSong.duration) * 100 + "%"
   });
 
   // Add an event listener to seekbar
@@ -112,6 +112,17 @@ async function main() {
   // Add an event listener for close
   document.querySelector(".close").addEventListener("click", () => {
     document.querySelector(".left").style.left = "-120%"
+  })
+
+  // Add an event listener to previous 
+  previous.addEventListener("click", () => {
+    console.log("pre");
+    
+  })
+
+  // Add an event listener to  next
+  next.addEventListener("click", () => {
+    console.log("nex");
   })
 
 }
