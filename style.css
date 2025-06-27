@@ -239,6 +239,10 @@ body {
   width: 344px;
 }
 
+.info div {
+  word-break: break-all;
+}
+
 .playnow {
   display: flex;
 justify-content: center;
@@ -280,6 +284,7 @@ justify-content: center;
 .songinfo , .songtime{
   color: black;
   padding: 0 12px;
+  width: 250px;
 }
 
 .abovebar {
@@ -296,6 +301,11 @@ justify-content: center;
     z-index: 1;
     width: 373px;
     background-color: black;
+    padding: 0;
+  }
+
+  .songinfo, .songtime {
+    width: auto;
   }
 
   .left .close {
