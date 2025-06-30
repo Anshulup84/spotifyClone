@@ -299,13 +299,20 @@ justify-content: center;
   padding: 0 12px;
 }
 
+.volume {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+}
+
 .abovebar {
   display: flex;
   justify-content: space-between;
   margin: 20px 0;
 }
 
-@media (max-width: 1400px) {
+@media (max-width: 1200px) {
   .left{
     position: absolute;
     left: -120%;
@@ -326,6 +333,14 @@ justify-content: center;
     top: 25px;
     width: 29px;
     cursor: pointer;
+  }
+
+  .timevol {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 13px;
   }
 
 
@@ -350,7 +365,7 @@ justify-content: center;
   }
 
   .card{
-    width: 90vw;
+    width: 44vw;
   }
 
   .cardContainer {
@@ -369,4 +384,10 @@ justify-content: center;
   }
 
 
+}
+
+@media (max-width: 400px){
+  .card{
+    width: 84vw;
+  }
 }
