@@ -25,31 +25,13 @@ async function getSongs(folder) {
   div.innerHTML = response;
   let as = div.getElementsByTagName("a");
 
-  let songs = [];
+ songs = [];
   for (let index = 0; index < as.length; index++) {
     const element = as[index];
     if (element.href.endsWith(".mp3")) {
       songs.push(element.href.split(`/${folder}/`)[1]);
     }
   }
-  return songs;
-}
-
-const playMusic = (track, pause = false) => {
-  currentSong.src = `./${currfolder}/` + track;
-  if (!pause) {
-    currentSong.play();
-    play.src = "pause.svg";
-  }
-  document.querySelector(".songinfo").innerHTML = decodeURI(track);
-  document.querySelector(".songtime").innerHTML = "00:00 / 00:00";
-};
-
-async function main() {
-  // Get the list of all songs
-  songs = await getSongs("songs/mysong");
-  playMusic(songs[0], true);
-
   // show all the songs in the playlist
   let songUL = document
     .querySelector(".songList")
@@ -80,6 +62,27 @@ async function main() {
       playMusic(e.querySelector(".info").firstElementChild.innerHTML.trim());
     });
   });
+}
+
+const playMusic = (track, pause = false) => {
+  currentSong.src = `./${currfolder}/` + track;
+  if (!pause) {
+    currentSong.play();
+    play.src = "pause.svg";
+  }
+  document.querySelector(".songinfo").innerHTML = decodeURI(track);
+  document.querySelector(".songtime").innerHTML = "00:00 / 00:00";
+
+
+  
+};
+
+async function main() {
+  // Get the list of all songs
+   await getSongs("songs/mysong");
+  playMusic(songs[0], true);
+
+  
   // Attach an event Listener to play , next and previous
   play.addEventListener("click", () => {
     if (currentSong.paused) {
@@ -140,6 +143,14 @@ async function main() {
 
   document.querySelector(".range").getElementsByTagName("input")[0].addEventListener("change", (e) => {
     currentSong.volume = parseInt(e.target.value)/100
+  })
+
+  // Load the playlist whenever card is clicked
+  Array.from(document.getElementsByClassName("card")).forEach(e => {
+    e.addEventListener("click", async item => {
+      songs = await getSongs(`songs/${item.currentTarget.dataset.folder}`)
+     
+    })
   })
 
 }
