@@ -20,7 +20,6 @@ async function getSongs(folder) {
   currfolder = folder;
   let a = await fetch(`http://127.0.0.1:3000/spotifyClone/${folder}/`);
   let response = await a.text();
-  console.log(response);
   let div = document.createElement("div");
   div.innerHTML = response;
   let as = div.getElementsByTagName("a");
@@ -36,6 +35,7 @@ async function getSongs(folder) {
   let songUL = document
     .querySelector(".songList")
     .getElementsByTagName("ul")[0];
+    songUL.innerHTML = ""
   for (const song of songs) {
     songUL.innerHTML =
       songUL.innerHTML +
@@ -73,15 +73,36 @@ const playMusic = (track, pause = false) => {
   document.querySelector(".songinfo").innerHTML = decodeURI(track);
   document.querySelector(".songtime").innerHTML = "00:00 / 00:00";
 
-
-  
 };
+
+async function displayAlbums() {
+   let a = await fetch(`http://127.0.0.1:3000/spotifyClone/songs/`);
+  let response = await a.text();
+  let div = document.createElement("div");
+  div.innerHTML = response;
+  let anchors = div.getElementsByTagName("a")
+  let folders = []
+  Array.from(anchors).forEach( async e => {
+    if(e.href.includes("/songs")){
+      let folder = e.href.split("/").slice(-2)[0];
+      // Get the metadata of the folder
+         let a = await fetch(`http://127.0.0.1:3000/spotifyClone/songs/${folder}/info.json`);
+  let response = await a.json();
+  console.log(response);
+  
+    }
+  })
+}
+
 
 async function main() {
   // Get the list of all songs
    await getSongs("songs/mysong");
   playMusic(songs[0], true);
 
+  // Display all the album on the page
+
+    displayAlbums()
   
   // Attach an event Listener to play , next and previous
   play.addEventListener("click", () => {
