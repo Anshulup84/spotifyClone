@@ -96,7 +96,7 @@ async function displayAlbums() {
       console.log(response);
       cardContainer.innerHTML =
         cardContainer.innerHTML +
-        ` <div data-folder="es" class="card">
+        ` <div data-folder="${folder}" class="card">
             <div class="play">
 
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" color="#000000"
@@ -195,6 +195,19 @@ async function main() {
     });
 
     // Add event listener to mute the track
+
+    document.querySelector(".volume>img").addEventListener("click", e => {
+      if(e.target.src.includes("volume.svg")){
+      e.target.src =  e.target.src.replace("volume.svg", "mute.svg")
+        currentSong.volume = 0;
+        document.querySelector(".range").getElementsByTagName("input")[0].value = 0
+      }
+      else{
+       e.target.src = e.target.src.replace("mute.svg", "volume.svg")
+        currentSong.volume = .10;
+        document.querySelector(".range").getElementsByTagName("input")[0].value = 10
+      }
+    })
 
 }
 
