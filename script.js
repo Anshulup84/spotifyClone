@@ -31,6 +31,9 @@ async function getSongs(folder) {
       songs.push(element.href.split(`/${folder}/`)[1]);
     }
   }
+
+  // play the first song
+
   // show all the songs in the playlist
   let songUL = document
     .querySelector(".songList")
@@ -62,6 +65,7 @@ async function getSongs(folder) {
       playMusic(e.querySelector(".info").firstElementChild.innerHTML.trim());
     });
   });
+  return songs;
 }
 
 const playMusic = (track, pause = false) => {
@@ -118,6 +122,7 @@ async function displayAlbums() {
   Array.from(document.getElementsByClassName("card")).forEach((e) => {
     e.addEventListener("click", async (item) => {
       songs = await getSongs(`songs/${item.currentTarget.dataset.folder}`);
+      playMusic(songs[0]);
     });
   });
 }
@@ -126,8 +131,6 @@ async function main() {
   // Get the list of all songs
   await getSongs("songs/mysong");
   playMusic(songs[0], true);
-
-  // Display all the album on the page
 
   displayAlbums();
 
@@ -186,7 +189,7 @@ async function main() {
     }
   });
 
-  //Add an event to volume 
+  //Add an event to volume
   document
     .querySelector(".range")
     .getElementsByTagName("input")[0]
@@ -194,21 +197,23 @@ async function main() {
       currentSong.volume = parseInt(e.target.value) / 100;
     });
 
-    // Add event listener to mute the track
+  // Add event listener to mute the track
 
-    document.querySelector(".volume>img").addEventListener("click", e => {
-      if(e.target.src.includes("volume.svg")){
-      e.target.src =  e.target.src.replace("volume.svg", "mute.svg")
-        currentSong.volume = 0;
-        document.querySelector(".range").getElementsByTagName("input")[0].value = 0
-      }
-      else{
-       e.target.src = e.target.src.replace("mute.svg", "volume.svg")
-        currentSong.volume = .10;
-        document.querySelector(".range").getElementsByTagName("input")[0].value = 10
-      }
-    })
-
+  document.querySelector(".volume>img").addEventListener("click", (e) => {
+    if (e.target.src.includes("volume.svg")) {
+      e.target.src = e.target.src.replace("volume.svg", "mute.svg");
+      currentSong.volume = 0;
+      document
+        .querySelector(".range")
+        .getElementsByTagName("input")[0].value = 0;
+    } else {
+      e.target.src = e.target.src.replace("mute.svg", "volume.svg");
+      currentSong.volume = 0.1;
+      document
+        .querySelector(".range")
+        .getElementsByTagName("input")[0].value = 10;
+    }
+  });
 }
 
 main();
